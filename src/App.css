@@ -1,9 +1,5 @@
 
-.App {
-  text-align: center;
-}
-
-.App-header {
+.app-container {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -23,7 +19,7 @@ form button {
   width: 30%;
 }
 
-input {
+form input {
   height: 30px;
   width: 70%;
   padding: 0px 6px;
@@ -44,6 +40,11 @@ li {
 li button {
   width: 26px;
   border: 0;
+  color: #fff;
   margin: 3px;
-  background: #da6a4e;
+  background: #da6a4eb8;
+}
+
+.complete {
+  text-decoration: line-through;
 }
