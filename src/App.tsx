@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react';
 import './App.css';
+
 import { Task } from './models/task';
 import { NewTaskForm } from './components/NewTaskForm';
+import { TaskList } from './components/TaskList';
 
 
 interface State {
@@ -23,12 +25,13 @@ export default class App extends Component<{}, State> {
     return (
       <div className="App">
         <header className="App-header">
-          <p>Hello REACT TS</p>
+          <p>REACT TS TODO LIST</p>
           <NewTaskForm
             task={ this.state.newTask }
             onAdd={ this.addTask }
             onChange={ this.handleTaskChange }
           />
+          <TaskList tasks={ this.state.tasks } onDelete={ this.deleteTask } />
         </header>
       </div>
     );
@@ -37,16 +40,17 @@ export default class App extends Component<{}, State> {
   private addTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    this.setState(previousState => ({
-      newTask: {
-        id: previousState.newTask.id + 1,
-        name: ''
-      },
-      tasks: [...previousState.tasks, previousState.newTask]
-    }));
-
-    console.log(this.state.newTask);
-    console.log(this.state.tasks);
+    if (this.state.newTask.name) {
+      this.setState(previousState => ({
+        newTask: {
+          id: previousState.newTask.id + 1,
+          name: ''
+        },
+        tasks: [...previousState.tasks, previousState.newTask]
+      }));
+    } else {
+      return;
+    }
   };
 
   private handleTaskChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +60,14 @@ export default class App extends Component<{}, State> {
         name: event.target.value
       }
     });
+  };
+
+  private deleteTask = (taskToDelete: Task) => {
+    this.setState(previousState => ({
+      tasks: [
+        ...previousState.tasks.filter(task => task.id !== taskToDelete.id)
+      ]
+    }));
   };
 
 }
