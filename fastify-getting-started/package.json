@@ -12,6 +12,7 @@
   "author": "stepserh",
   "license": "ISC",
   "dependencies": {
-    "fastify": "3.27.1"
+    "fastify": "^3.28.0",
+    "pino-pretty": "^7.6.1"
   }
 }
